@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kilele Exchange</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:dark;--bg:#0B0C0F;--c1:#14161B;--c2:#1C1F26;--ln:rgba(242,238,230,.09);--ink:#F2EEE6;--mut:#9C988E;--gd:#D9B76F;--up:#62D6A4;--dn:#FF7F8F;--sh:0 30px 70px -40px #000;--serif:'Instrument Serif',Georgia,'Times New Roman',serif;--sans:'Hanken Grotesk',system-ui,-apple-system,'Segoe UI',sans-serif}
+@media (prefers-color-scheme:light){:root{color-scheme:light;--bg:#F6F3EC;--c1:#fff;--c2:#EFEBE1;--ln:rgba(23,20,14,.1);--ink:#17140E;--mut:#6B665B;--gd:#94701F;--up:#0E8A5F;--dn:#C23550;--sh:0 30px 60px -40px rgba(70,45,0,.35)}}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;min-height:100vh;color:var(--ink);font:400 1rem/1.55 var(--sans);-webkit-font-smoothing:antialiased;padding:env(safe-area-inset-top,0) env(safe-area-inset-right,0) env(safe-area-inset-bottom,0) env(safe-area-inset-left,0);background:radial-gradient(900px 480px at 75% -8%,color-mix(in srgb,var(--gd) 16%,transparent),transparent 65%),var(--bg)}
+:focus-visible{outline:2px solid var(--gd);outline-offset:3px;border-radius:8px}
+[hidden]{display:none!important}
+.w{max-width:1120px;margin:0 auto;padding:0 22px}
+header{display:flex;align-items:center;justify-content:space-between;padding:20px 0;gap:12px}
+.logo{display:flex;align-items:center;gap:10px;font:400 1.7rem/1 var(--serif);letter-spacing:.01em;background:none;border:0;color:inherit;cursor:pointer;padding:0}
+.logo svg{width:24px;height:24px}
+nav{display:flex;align-items:center;gap:4px}
+nav .l{background:none;border:0;color:var(--mut);font:500 .95rem var(--sans);padding:8px 12px;cursor:pointer;border-radius:99px}
+nav .l:hover,nav .l.on{color:var(--ink)}
+.btn{white-space:nowrap;display:inline-flex;justify-content:center;align-items:center;background:linear-gradient(135deg,#F3E0AE,#D6AE62 55%,#B98A3E);color:#1A1407;font:600 .95rem var(--sans);padding:12px 22px;border:0;border-radius:99px;cursor:pointer;box-shadow:0 8px 24px -10px rgba(217,183,111,.6);transition:transform .15s,filter .15s}
+.btn:hover{filter:brightness(1.06);transform:translateY(-1px)}
+.btn:disabled{opacity:.5;cursor:default;transform:none}
+.btn.o{background:transparent;color:var(--ink);border:1px solid var(--ln);box-shadow:none}
+.btn.o:hover{border-color:var(--gd)}
+.btn.w100{width:100%}
+h1{font:400 clamp(2.6rem,6.2vw,4.6rem)/1.02 var(--serif);letter-spacing:-.01em;margin:14px 0 20px}
+h1 em,h2 em{color:var(--gd)}
+h2{font:400 clamp(2rem,4vw,2.9rem)/1.08 var(--serif);margin:0 0 10px}
+h3{font:600 .8rem var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin:0 0 14px}
+.sub{color:var(--mut);margin:0 0 22px;max-width:52ch}
+.eyebrow{display:inline-block;font:600 .78rem var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--gd);border:1px solid var(--ln);border-radius:99px;padding:6px 14px}
+.hero{display:grid;grid-template-columns:1.02fr .98fr;gap:48px;align-items:center;padding:30px 0 40px}
+.card{background:linear-gradient(180deg,color-mix(in srgb,var(--c2) 55%,var(--c1)),var(--c1));border:1px solid var(--ln);border-radius:22px;padding:22px;box-shadow:var(--sh)}
+.card+.card{margin-top:18px}
+.sc{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;min-width:440px}
+th,td{text-align:left;padding:13px 10px;border-bottom:1px solid var(--ln);white-space:nowrap}
+th{font:600 .75rem var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
+tr:last-child td{border-bottom:0}
+.r{text-align:right}
+.up{color:var(--up)}.dn{color:var(--dn)}
+small,.mut{color:var(--mut)}
+.sp{width:92px;height:28px;vertical-align:middle}
+.pill{display:inline-block;font:600 .8rem var(--sans);padding:3px 10px;border-radius:99px;background:color-mix(in srgb,currentColor 14%,transparent)}
+.big{font:400 clamp(2.2rem,5vw,3.2rem)/1.05 var(--serif);font-variant-numeric:tabular-nums}
+label{display:block;font-weight:600;font-size:.82rem;color:var(--mut);margin-bottom:6px}
+.fd{display:flex;align-items:center;gap:8px;border:1px solid var(--ln);border-radius:14px;padding:0 14px;margin-bottom:14px;background:color-mix(in srgb,var(--bg) 60%,transparent)}
+.fd:focus-within{border-color:var(--gd)}
+.fd input,.fd select{flex:1;min-width:0;border:0;background:transparent;color:var(--ink);font:500 1.1rem var(--sans);padding:13px 0;font-variant-numeric:tabular-nums}
+.fd select option{color:#17140E}
+.fd input:focus,.fd select:focus{outline:none}
+.tabs{display:grid;grid-template-columns:1fr 1fr;background:color-mix(in srgb,var(--bg) 60%,transparent);border:1px solid var(--ln);border-radius:99px;padding:4px;margin-bottom:18px}
+.tabs button{border:0;background:transparent;color:var(--mut);font:600 .92rem var(--sans);padding:9px;border-radius:99px;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--ink);color:var(--bg)}
+.row{display:flex;justify-content:space-between;padding:4px 0;font-variant-numeric:tabular-nums;color:var(--mut)}
+.row b{color:var(--ink);font-weight:600}
+.row.t{padding-top:12px;margin-top:6px;border-top:1px solid var(--ln);color:var(--ink);font:400 1.5rem var(--serif)}
+.msg{min-height:1.3em;font-weight:600;font-size:.9rem;margin:10px 0 0}
+.view{padding-bottom:56px}
+.cols>*,.hero>*{min-width:0}
+.cols{display:grid;grid-template-columns:1.45fr 1fr;gap:18px;align-items:start}
+.bar{display:flex;height:10px;border-radius:99px;overflow:hidden;background:var(--c2);margin:16px 0 10px}
+.bar i{display:block;height:100%}
+.lgd{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.85rem;color:var(--mut)}
+.lgd i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px}
+.tb{height:6px;background:var(--c2);border-radius:99px;overflow:hidden;margin:12px 0 8px}
+.tb i{display:block;height:100%;background:linear-gradient(90deg,#F3E0AE,#D6AE62);border-radius:99px}
+.feat{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:26px}
+.feat div{border-top:1px solid var(--ln);padding-top:16px}
+.feat b{display:block;font:400 1.35rem var(--serif);margin-bottom:4px}
+.feat span{color:var(--mut);font-size:.95rem}
+.auth{max-width:440px;margin:22px auto}
+ul.log{list-style:none;margin:0;padding:0}
+ul.log li{display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px solid var(--ln)}
+ul.log li:last-child{border-bottom:0}
+code.k{display:block;word-break:break-all;background:var(--c2);border-radius:12px;padding:12px;margin:10px 0 14px;font:600 .95rem ui-monospace,Menlo,monospace;user-select:all}
+.pv{margin:10px 0 0;padding:10px 14px;border:1px solid var(--gd);border-radius:14px;color:var(--gd);font-size:.88rem}
+.foot{color:var(--mut);font-size:.82rem;max-width:90ch;padding:8px 0 40px;border-top:1px solid var(--ln)}
+@media (max-width:860px){.hero,.cols,.feat{grid-template-columns:minmax(0,1fr)}.hero{gap:30px}nav .l.hm{display:none}nav .btn{padding:9px 16px}nav .l{padding:8px 8px}.card{padding:18px}}
+@media (prefers-reduced-motion:no-preference){.view{animation:in .45s ease-out both}@keyframes in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}}
+</style>
+</head>
+<body>
+<div class="w">
+<div class="pv" id="pv" hidden>Preview mode: this page isn’t connected to the Kilele server, so your account and balances are saved only in this browser and no real money moves. Prices are live when your connection allows.</div>
+<header>
+  <button class="logo" onclick="go('home')" aria-label="Kilele home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M1 21 12 2l11 19z" fill="none" stroke="#D9B76F" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 2 8 9.5l4-1.8 4 1.8z" fill="#D9B76F"/></svg>Kilele</button>
+  <nav>
+    <button class="l hm" id="nH" onclick="go('home')">Markets</button>
+    <button class="l" id="nF" onclick="go('fees')">Fees</button>
+    <button class="l" id="nD" onclick="go('dashboard')" hidden>Dashboard</button>
+    <button class="btn" id="nL" onclick="go('login')">Sign in</button>
+    <button class="btn o" id="nO" onclick="out()" hidden>Sign out</button>
+  </nav>
+</header>
+
+<main>
+<div class="view" id="v-home">
+  <div class="hero">
+    <div>
+      <span class="eyebrow">Crypto, priced in shillings</span>
+      <h1>Buy Bitcoin with M-Pesa. <em>Know the cost</em> before you commit.</h1>
+      <p class="sub">Deposit in seconds, trade at a price you can see, and pay a fee that falls the more you trade.</p>
+      <button class="btn" onclick="go('login')">Open an account</button> <button class="btn o" onclick="go('fees')">See the fees</button>
+    </div>
+    <div class="card">
+      <h3>Bitcoin · last 7 days</h3>
+      <div style="display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap"><span class="big" id="hp">–</span><span class="pill" id="hch"></span></div>
+      <svg viewBox="0 0 520 190" style="width:100%;height:auto;margin-top:12px" aria-hidden="true"><defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#D9B76F" stop-opacity=".35"/><stop offset="1" stop-color="#D9B76F" stop-opacity="0"/></linearGradient></defs><path id="ha" fill="url(#g)"/><path id="hl" fill="none" stroke="#D9B76F" stroke-width="2.2" stroke-linejoin="round"/></svg>
+    </div>
+  </div>
+  <div class="card"><h3>Live markets · KES</h3><p class="msg dn" id="stale" role="status" hidden></p>
+    <div class="sc"><table><thead><tr><th>Asset</th><th class="r">Price</th><th class="r">24h</th><th class="r">7 days</th></tr></thead><tbody id="mk"></tbody></table></div></div>
+  <div class="feat"><div><b>Pay with M-Pesa</b><span>Approve a prompt on your phone and your balance updates.</span></div><div><b>Fees that fall</b><span>Starting at 0.50% and dropping to 0.10% as your volume grows.</span></div><div><b>Two-step sign-in</b><span>Add an authenticator app to protect your account and withdrawals.</span></div></div>
+</div>
+
+<div class="view" id="v-fees" hidden>
+  <h2>Fees that <em>fall</em> as you trade.</h2>
+  <p class="sub">One rate per trade, set by your trading volume over the last 30 days.</p>
+  <div class="cols">
+    <div class="card"><h3>Trading tiers</h3><div class="sc"><table><thead><tr><th>Tier</th><th>30-day volume</th><th class="r">Fee</th></tr></thead><tbody id="tiers"></tbody></table></div>
+      <h3 style="margin-top:24px">Deposits and withdrawals</h3>
+      <div class="sc"><table><tbody>
+        <tr><td>Deposit with M-Pesa</td><td class="r">Free</td></tr>
+        <tr><td>Withdraw to M-Pesa</td><td class="r">1%, min KES 30</td></tr>
+        <tr><td>Withdraw to bank</td><td class="r">KES 50 flat</td></tr>
+      </tbody></table></div></div>
+    <div class="card"><h3>Estimate your fees</h3>
+      <label for="fv">Monthly trading volume (KES)</label>
+      <div class="fd"><input id="fv" inputmode="numeric" value="1,000,000" autocomplete="off"></div>
+      <div class="row"><span>Your tier</span><b id="ft"></b></div>
+      <div class="row"><span>Fee rate</span><b id="fr"></b></div>
+      <div class="row t"><span>Monthly fees</span><span id="fm"></span></div></div>
+  </div>
+</div>
+
+<div class="view" id="v-login" hidden>
+  <div class="card auth">
+    <h2 style="font-size:2.2rem">Welcome <em>back</em></h2>
+    <div class="tabs" role="tablist"><button id="aIn" aria-selected="true" onclick="authMode('in')">Sign in</button><button id="aUp" aria-selected="false" onclick="authMode('up')">Create account</button></div>
+    <form id="af" novalidate>
+      <label for="em">Email</label><div class="fd"><input id="em" type="email" autocomplete="email" placeholder="you@email.com"></div>
+      <label for="pw">Password</label><div class="fd"><input id="pw" type="password" autocomplete="current-password" placeholder="At least 10 characters"></div>
+      <div id="cr" hidden><label for="cd">Two-step code</label><div class="fd"><input id="cd" inputmode="numeric" maxlength="7" autocomplete="one-time-code" placeholder="123456"></div></div>
+      <button class="btn w100" id="ab" type="submit">Sign in</button>
+    </form>
+    <p class="msg dn" id="lm" role="alert"></p>
+  </div>
+</div>
+
+<div class="view" id="v-dashboard" hidden>
+  <div class="card">
+    <h3>Total balance</h3>
+    <div class="big" id="tot">–</div><small id="hi"></small>
+    <div class="bar" id="al"></div><div class="lgd" id="lgd"></div>
+  </div>
+  <div class="cols" style="margin-top:18px">
+    <div>
+      <div class="card"><h3>Your assets</h3><div class="sc"><table><thead><tr><th>Asset</th><th class="r">Holding</th><th class="r">Value (KES)</th><th class="r">24h</th></tr></thead><tbody id="hd"></tbody></table></div></div>
+      <div class="card"><h3>Recent activity</h3><ul class="log" id="lg"></ul></div>
+    </div>
+    <div>
+      <div class="card"><h3>Trade</h3>
+        <div class="tabs"><button id="tb" aria-selected="true" onclick="setMode('buy')">Buy</button><button id="ts" aria-selected="false" onclick="setMode('sell')">Sell</button></div>
+        <label for="as">Asset</label><div class="fd"><select id="as"></select></div>
+        <label for="am" id="al2">You pay</label><div class="fd"><input id="am" inputmode="decimal" autocomplete="off"><small id="au">KES</small></div>
+        <div class="row"><span>Price</span><b id="px"></b></div>
+        <div class="row"><span>Fee</span><b id="fe"></b></div>
+        <div class="row t"><span>You get</span><span id="gt"></span></div>
+        <button class="btn w100" style="margin-top:16px" id="tgo" onclick="trade()">Buy</button>
+        <p class="msg" id="tm" role="status"></p></div>
+      <div class="card"><h3>Wallet</h3>
+        <div class="tabs"><button id="wD" aria-selected="true" onclick="wtab('D')">Deposit</button><button id="wW" aria-selected="false" onclick="wtab('W')">Withdraw</button></div>
+        <div id="pD">
+          <label for="dph">M-Pesa number</label><div class="fd"><input id="dph" inputmode="tel" autocomplete="tel" placeholder="0712 345 678"></div>
+          <label for="damt">Amount (KES)</label><div class="fd"><input id="damt" inputmode="numeric" autocomplete="off" placeholder="5,000"></div>
+          <button class="btn w100" id="dbtn" onclick="dep()">Pay with M-Pesa</button><p class="msg" id="dm" role="status"></p></div>
+        <div id="pW" hidden>
+          <label for="wmeth">Withdraw to</label><div class="fd"><select id="wmeth"><option value="mpesa">M-Pesa number</option><option value="bank">Bank account</option></select></div>
+          <label for="wdest">Number or account</label><div class="fd"><input id="wdest" autocomplete="off" placeholder="0712345678"></div>
+          <label for="wamt">Amount (KES)</label><div class="fd"><input id="wamt" inputmode="numeric" autocomplete="off" placeholder="1000"></div>
+          <div id="wcr" hidden><label for="wcd">Two-step code</label><div class="fd"><input id="wcd" inputmode="numeric" maxlength="7" autocomplete="one-time-code"></div></div>
+          <button class="btn o w100" id="wbtn" onclick="wd()">Request withdrawal</button><p class="msg" id="wm" role="status"></p></div></div>
+      <div class="card"><h3>Your fee tier</h3><span class="pill" id="tn" style="color:var(--gd)"></span> <small id="tr"></small>
+        <div class="tb"><i id="tp"></i></div><small id="tx"></small></div>
+      <div class="card"><h3>Security</h3><div id="sec"></div></div>
+    </div>
+  </div>
+</div>
+</main>
+<p class="foot">Crypto prices are volatile and you can lose money. Prices come from CoinGecko and may differ from other exchanges. Kilele is a software prototype: before holding real customer funds you need the licences, custody and security work listed in the README.</p>
+</div>
+
+<script>
+var $=function(i){return document.getElementById(i)};
+var SY=['BTC','ETH','SOL','XRP','USDT'],N={BTC:'Bitcoin',ETH:'Ethereum',SOL:'Solana',XRP:'XRP',USDT:'Tether'};
+var COL={KES:'#8D8A82',BTC:'#D9B76F',ETH:'#8FA8FF',SOL:'#B58CFF',XRP:'#7CC4E8',USDT:'#62D6A4'};
+var P={assets:{},fresh:false},ME=null,md='buy',amode='in',need=false,setupKey='',secK='';
+var T=[{n:'Starter',m:0,r:.005},{n:'Regular',m:5e5,r:.0035},{n:'Pro',m:5e6,r:.002},{n:'Elite',m:25e6,r:.001}];
+function kes(n){return 'KES '+Number(n).toLocaleString('en-KE',{maximumFractionDigits:n<1000?2:0})}
+function q(n){return n.toLocaleString('en-KE',{maximumFractionDigits:n<1?8:4})}
+function tier(v){var t=T[0];T.forEach(function(x){if(v>=x.m)t=x});return t}
+function num(i){return parseFloat(($(i).value||'').replace(/,/g,''))||0}
+function fmtIn(e){var d=e.target.value.replace(/[^0-9]/g,'');e.target.value=d?Number(d).toLocaleString('en-KE'):''}
+function px(s){return P.assets[s]?P.assets[s].price:0}
+function ch(s){var c=P.assets[s]?P.assets[s].change:0;return '<td class="r '+(c>=0?'up':'dn')+'">'+(c>=0?'+':'')+c.toFixed(2)+'%</td>'}
+function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function line(a,w,h){var mn=Math.min.apply(0,a),mx=Math.max.apply(0,a),r=mx-mn||1,d='M'+a.map(function(y,i){return (i/(a.length-1)*w).toFixed(1)+' '+(h-3-(y-mn)/r*(h-6)).toFixed(1)}).join('L');return{d:d,a:d+'L'+w+' '+h+'L0 '+h+'Z'}}
+function spark(s){var a=P.assets[s]&&P.assets[s].spark;if(!a||a.length<2)return '';return '<svg class="sp" viewBox="0 0 92 28" aria-hidden="true"><path d="'+line(a,92,28).d+'" fill="none" stroke="var(--'+(a[a.length-1]>=a[0]?'up':'dn')+')" stroke-width="1.6" stroke-linejoin="round"/></svg>'}
+function api(p,b){return OFF?localApi(p,b):net(p,b)}
+function net(p,b){return fetch('/api/'+p,{method:b?'POST':'GET',headers:b?{'Content-Type':'application/json'}:{},body:b?JSON.stringify(b):undefined,credentials:'same-origin'}).then(function(r){return r.json().catch(function(){return{}}).then(function(j){if(!r.ok)throw new Error(j.error||'Something went wrong. Try again.');return j})})}
+function loadMe(){return api('me').then(function(j){ME=j})}
+function done(m,ok,t){m.className='msg '+(ok?'up':'dn');m.textContent=t}
+
+
+/* ---- Preview mode: used when the Kilele server can't be reached (e.g. the file was opened directly) ---- */
+var OFF=false,K=null,DEP={};
+try{K=JSON.parse(localStorage.getItem('kilele-preview')||'null')}catch(e){}
+function save(){try{localStorage.setItem('kilele-preview',JSON.stringify(K))}catch(e){}}
+function fail(t){return Promise.reject(new Error(t))}
+function vol30(){return K.vol.filter(function(x){return x.ts>Date.now()-2592e6}).reduce(function(t,x){return t+x.kes},0)}
+function tierOf(v){var i=0;T.forEach(function(x,j){if(v>=x.m)i=j});var t=T[i];return{n:t.n,m:t.m,r:t.r,next:T[i+1]||null}}
+function r8(x){return Math.round(x*1e8)/1e8}
+function r2(x){return Math.round(x*100)/100}
+function note(t){K.act.unshift({note:t,ts:Date.now()});K.act=K.act.slice(0,20)}
+function ok(o){save();return Promise.resolve(o)}
+function localApi(p,b){
+  b=b||{};
+  if(p==='prices')return Promise.resolve(P);
+  if(p==='register'){
+    if(!/^\S+@\S+\.\S+$/.test(b.email||''))return fail('Enter a valid email address.');
+    if((b.password||'').length<10)return fail('Password must be at least 10 characters.');
+    K={email:b.email.toLowerCase(),bal:{KES:0,BTC:0,ETH:0,SOL:0,XRP:0,USDT:0},vol:[],act:[],signed:true};return ok({ok:true});
+  }
+  if(p==='login'){if(!K||K.email!==(b.email||'').toLowerCase())return fail('No preview account for that email. Create one first.');K.signed=true;return ok({ok:true})}
+  if(!K||!K.signed)return fail('Please sign in.');
+  if(p==='logout'){K.signed=false;return ok({ok:true})}
+  if(p==='me')return Promise.resolve({email:K.email,bal:K.bal,vol:vol30(),tier:tierOf(vol30()),activity:K.act.slice(0,8),twofa:false});
+  if(p.indexOf('2fa/')===0)return fail('Two-step sign-in needs the Kilele server.');
+  if(p.indexOf('deposit/status/')===0)return Promise.resolve({status:DEP[p.slice(15)]||'unknown'});
+  if(p==='deposit/mpesa'){
+    var ph=String(b.phone||'').replace(/[\s+]/g,''),amt=Math.floor(Number(b.amount));
+    if(!/^(254|0)[17]\d{8}$/.test(ph))return fail('Enter a valid Safaricom number.');
+    if(!(amt>=10&&amt<=250000))return fail('Deposit between KES 10 and KES 250,000.');
+    var id='P'+Date.now();DEP[id]='pending';
+    setTimeout(function(){K.bal.KES=r2(K.bal.KES+amt);note('Deposit of KES '+amt.toLocaleString('en-KE')+' received via M-Pesa (preview)');save();DEP[id]='done'},2500);
+    return Promise.resolve({id:id});
+  }
+  if(p==='withdraw'){
+    var wa=Number(b.amount),wf=b.method==='mpesa'?Math.max(30,r2(wa*.01)):50;
+    if(!(wa>=500))return fail('Minimum withdrawal is KES 500.');
+    if(!String(b.dest||'').trim())return fail('Enter a number or account.');
+    if(K.bal.KES<wa+wf)return fail('Not enough KES (the fee is added to the amount).');
+    K.bal.KES=r2(K.bal.KES-wa-wf);note('Withdrawal of KES '+wa.toLocaleString('en-KE')+' requested (preview)');
+    return ok({summary:'Withdrawal requested. Fee: KES '+wf.toLocaleString('en-KE')+'. (Preview: nothing is sent.)'});
+  }
+  if(p==='trade'){
+    var s=b.asset,a=Number(b.amount),pr=px(s),rate=tierOf(vol30()).r;
+    if(!pr||SY.indexOf(s)<0||!(a>0))return fail('Prices are unavailable right now. Trading is paused.');
+    if(b.side==='buy'){
+      if(a<100)return fail('Minimum trade is KES 100.');
+      if(K.bal.KES<a)return fail('Not enough KES.');
+      var q1=r8((a-a*rate)/pr);K.bal.KES=r2(K.bal.KES-a);K.bal[s]=r8(K.bal[s]+q1);K.vol.push({ts:Date.now(),kes:a});note('Bought '+q1+' '+s);
+      return ok({summary:'Bought '+q1+' '+s+'.'});
+    }
+    if(K.bal[s]<a)return fail('Not enough '+s+'.');
+    var g=a*pr;if(g<100)return fail('Minimum trade is KES 100.');
+    K.bal[s]=r8(K.bal[s]-a);K.bal.KES=r2(K.bal.KES+g-g*rate);K.vol.push({ts:Date.now(),kes:g});note('Sold '+a+' '+s);
+    return ok({summary:'Sold '+a+' '+s+'.'});
+  }
+  return fail('Not available in preview mode.');
+}
+function previewPrices(){
+  var ids={BTC:'bitcoin',ETH:'ethereum',SOL:'solana',XRP:'ripple',USDT:'tether'},base={BTC:9690000,ETH:240000,SOL:11500,XRP:150,USDT:129};
+  function sample(){SY.forEach(function(s){var o=P.assets[s],p=o?o.price:base[s],np=p*(1+(Math.random()-.5)*.004),sp=o?o.spark.slice(1):null;if(!sp){sp=[];var x=p;for(var i=0;i<41;i++){sp.unshift(x);x*=1+(Math.random()-.5)*.02}}sp.push(np);P.assets[s]={name:N[s],price:np,change:(np/sp[0]-1)*100,spark:sp}});P.fresh=true;P.mock=true;draw()}
+  function live(){
+    fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=kes&ids='+SY.map(function(k){return ids[k]}).join(',')+'&sparkline=true&price_change_percentage=24h')
+    .then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(d){
+      var a={};SY.forEach(function(s){var x=d.filter(function(c){return c.id===ids[s]})[0];if(!x)throw 0;var sp=(x.sparkline_in_7d&&x.sparkline_in_7d.price)||[x.current_price,x.current_price],t=[];for(var i=0;i<42;i++)t.push(sp[Math.round(i*(sp.length-1)/41)]);a[s]={name:N[s],price:x.current_price,change:x.price_change_percentage_24h||0,spark:t}});
+      P={assets:a,fresh:true,mock:false};draw()}).catch(sample);
+  }
+  live();setInterval(live,60000);
+}
+
+var views=['home','fees','login','dashboard'];
+function go(v){
+  if(v==='dashboard'&&!ME)v='login';
+  views.forEach(function(x){$('v-'+x).hidden=x!==v});
+  $('nH').classList.toggle('on',v==='home');$('nF').classList.toggle('on',v==='fees');$('nD').classList.toggle('on',v==='dashboard');
+  $('nL').hidden=!!ME;$('nO').hidden=!ME;$('nD').hidden=!ME;
+  if(location.hash!=='#'+v)location.hash=v;
+  window.scrollTo(0,0);draw();
+}
+window.addEventListener('hashchange',function(){var v=location.hash.slice(1);if(views.indexOf(v)>-1)go(v)});
+
+function authMode(m){amode=m;$('aIn').setAttribute('aria-selected',m==='in');$('aUp').setAttribute('aria-selected',m==='up');$('ab').textContent=m==='in'?'Sign in':'Create account';$('lm').textContent='';$('pw').autocomplete=m==='in'?'current-password':'new-password'}
+function err(t){$('lm').textContent=t}
+$('af').addEventListener('submit',function(e){
+  e.preventDefault();
+  var em=$('em').value.trim(),pw=$('pw').value,body={email:em,password:pw};
+  if(!/^\S+@\S+\.\S+$/.test(em)){err('Enter a valid email address.');return}
+  if(amode==='up'&&pw.length<10){err('Password must be at least 10 characters.');return}
+  if(need)body.code=$('cd').value;
+  $('ab').disabled=true;err('');
+  api(amode==='in'?'login':'register',body).then(function(j){
+    if(j.need2fa){need=true;$('cr').hidden=false;$('cd').focus();err('Enter the 6-digit code from your authenticator app.');return}
+    return loadMe().then(function(){$('pw').value='';$('cd').value='';need=false;$('cr').hidden=true;go('dashboard')});
+  }).catch(function(x){err(x.message)}).then(function(){$('ab').disabled=false});
+});
+function out(){api('logout',{}).catch(function(){}).then(function(){ME=null;secK='';go('home')})}
+
+function draw(){
+  var sb=$('stale');sb.hidden=P.fresh&&!P.mock;sb.textContent=P.mock?'Test mode: prices are simulated.':'Prices are temporarily unavailable. Trading is paused.';
+  $('mk').innerHTML=SY.filter(function(s){return P.assets[s]}).map(function(s){return '<tr><td><b>'+N[s]+'</b> <small>'+s+'</small></td><td class="r">'+kes(px(s))+'</td>'+ch(s)+'<td class="r">'+spark(s)+'</td></tr>'}).join('')||'<tr><td colspan="4"><small>Loading prices…</small></td></tr>';
+  var b=P.assets.BTC;
+  if(b){var c=b.change;$('hp').textContent=kes(b.price);$('hch').textContent=(c>=0?'+':'')+c.toFixed(2)+'% 24h';$('hch').style.color='var(--'+(c>=0?'up':'dn')+')';if(b.spark&&b.spark.length>1){var l=line(b.spark,520,190);$('hl').setAttribute('d',l.d);$('ha').setAttribute('d',l.a)}}
+  $('tiers').innerHTML=T.map(function(t,i){var n=T[i+1];return '<tr><td><b>'+t.n+'</b></td><td>'+(n?(t.m?kes(t.m)+' to '+kes(n.m):'Under '+kes(n.m)):kes(t.m)+' and over')+'</td><td class="r">'+(t.r*100).toFixed(2)+'%</td></tr>'}).join('');
+  fees();
+  if(!ME||$('v-dashboard').hidden)return;
+  var bl=ME.bal,tot=bl.KES,h='<tr><td><b>Kenyan shilling</b> <small>KES</small></td><td class="r">'+kes(bl.KES)+'</td><td class="r">'+kes(bl.KES)+'</td><td></td></tr>',parts=[['KES',bl.KES]];
+  SY.forEach(function(s){var x=bl[s]||0;if(x>0){var v=x*px(s);tot+=v;parts.push([s,v]);h+='<tr><td><b>'+N[s]+'</b> <small>'+s+'</small></td><td class="r">'+q(x)+'</td><td class="r">'+kes(v)+'</td>'+ch(s)+'</tr>'}});
+  $('hd').innerHTML=h;$('tot').textContent=kes(tot);$('hi').textContent=ME.email;
+  parts=parts.filter(function(p){return p[1]>0});
+  $('al').innerHTML=parts.map(function(p){return '<i style="width:'+(p[1]/tot*100)+'%;background:'+COL[p[0]]+'"></i>'}).join('');
+  $('lgd').innerHTML=parts.map(function(p){return '<span><i style="background:'+COL[p[0]]+'"></i>'+p[0]+' '+Math.round(p[1]/tot*100)+'%</span>'}).join('');
+  $('lg').innerHTML=ME.activity.length?ME.activity.map(function(a){return '<li><span>'+esc(a.note)+'</span><small>'+new Date(a.ts).toLocaleDateString('en-KE')+'</small></li>'}).join(''):'<li><span class="mut">No activity yet. Make a deposit to get started.</span></li>';
+  var t=ME.tier;$('tn').textContent=t.n;$('tr').textContent=(t.r*100).toFixed(2)+'% per trade';
+  $('tp').style.width=(t.next?Math.min(100,(ME.vol-t.m)/(t.next.m-t.m)*100):100)+'%';
+  $('tx').textContent=t.next?kes(t.next.m-ME.vol)+' more volume in 30 days to reach '+t.next.n:'You’re on our lowest rate.';
+  $('wcr').hidden=!ME.twofa;
+  quote();sec();
+}
+function fees(){var v=num('fv'),t=tier(v);$('ft').textContent=t.n;$('fr').textContent=(t.r*100).toFixed(2)+'%';$('fm').textContent=kes(v*t.r)}
+$('fv').addEventListener('input',function(e){fmtIn(e);fees()});
+
+SY.forEach(function(s){var o=document.createElement('option');o.value=s;o.textContent=N[s]+' ('+s+')';$('as').appendChild(o)});
+function setMode(m){md=m;$('tb').setAttribute('aria-selected',m==='buy');$('ts').setAttribute('aria-selected',m==='sell');$('al2').textContent=m==='buy'?'You pay':'You sell';$('am').value=m==='buy'?'5,000':'0.001';$('tm').textContent='';quote()}
+$('as').onchange=quote;
+$('am').addEventListener('input',function(e){if(md==='buy')fmtIn(e);quote()});
+function quote(){
+  var s=$('as').value,p=px(s),v=num('am'),r=ME?ME.tier.r:T[0].r,fee,get;
+  if(md==='buy'){fee=v*r;get=p?q((v-fee)/p)+' '+s:'-'}else{fee=v*p*r;get=p?kes(v*p-fee):'-'}
+  $('px').textContent=p?kes(p):'-';$('fe').textContent=kes(fee)+' ('+(r*100).toFixed(2)+'%)';$('gt').textContent=get;
+  $('au').textContent=md==='buy'?'KES':s;$('tgo').textContent=(md==='buy'?'Buy ':'Sell ')+N[s];
+}
+function trade(){
+  var m=$('tm'),s=$('as').value,v=num('am');
+  if(v<=0){done(m,0,'Enter an amount to continue.');return}
+  $('tgo').disabled=true;
+  api('trade',{side:md,asset:s,amount:v}).then(function(j){done(m,1,j.summary);return loadMe()}).catch(function(e){done(m,0,e.message)}).then(function(){$('tgo').disabled=false;draw()});
+}
+function wtab(k){$('pD').hidden=k!=='D';$('pW').hidden=k!=='W';$('wD').setAttribute('aria-selected',k==='D');$('wW').setAttribute('aria-selected',k==='W')}
+$('damt').addEventListener('input',fmtIn);
+function dep(){
+  var m=$('dm');$('dbtn').disabled=true;done(m,1,'Sending the M-Pesa prompt…');
+  api('deposit/mpesa',{phone:$('dph').value,amount:num('damt')}).then(function(j){done(m,1,'Check your phone and enter your M-Pesa PIN.');return poll(j.id,0)})
+    .catch(function(e){done(m,0,e.message)}).then(function(){$('dbtn').disabled=false});
+}
+function poll(id,n){return api('deposit/status/'+id).then(function(j){
+  if(j.status==='done'){done($('dm'),1,'Deposit received.');return loadMe().then(draw)}
+  if(j.status==='failed')throw new Error('The payment was cancelled or failed.');
+  if(n>40)throw new Error('Still waiting. If you paid, your balance will update shortly.');
+  return new Promise(function(r){setTimeout(r,2000)}).then(function(){return poll(id,n+1)})})}
+function wd(){
+  var m=$('wm');$('wbtn').disabled=true;
+  api('withdraw',{method:$('wmeth').value,dest:$('wdest').value.trim(),amount:num('wamt'),code:$('wcd').value}).then(function(j){done(m,1,j.summary);$('wcd').value='';return loadMe()})
+    .catch(function(e){done(m,0,e.message)}).then(function(){$('wbtn').disabled=false;draw()});
+}
+
+function sec(){
+  var k=ME.twofa?'on':(setupKey?'setup':'off');if(k===secK)return;secK=k;var el=$('sec');
+  if(k==='on')el.innerHTML='<p class="sub">Two-step sign-in is <b class="up">on</b>. It protects sign-in and withdrawals.</p><label for="s1">Enter a code to turn it off</label><div class="fd"><input id="s1" inputmode="numeric" maxlength="7" autocomplete="one-time-code"></div><button class="btn o w100" onclick="tf(\'disable\')">Turn off</button><p class="msg" id="sm"></p>';
+  else if(k==='setup')el.innerHTML='<p class="sub">In your authenticator app choose “enter a setup key” and type this key, then enter the 6-digit code it shows.</p><code class="k">'+esc(setupKey)+'</code><label for="s1">6-digit code</label><div class="fd"><input id="s1" inputmode="numeric" maxlength="7" autocomplete="one-time-code"></div><button class="btn w100" onclick="tf(\'enable\')">Turn on</button><p class="msg" id="sm"></p>';
+  else el.innerHTML='<p class="sub">Add a code from an authenticator app to protect your account and withdrawals.</p><button class="btn o w100" onclick="tfSetup()">Set up two-step sign-in</button><p class="msg" id="sm"></p>';
+}
+function tfSetup(){api('2fa/setup',{}).then(function(j){setupKey=j.secret;sec()}).catch(function(e){done($('sm'),0,e.message)})}
+function tf(a){api('2fa/'+a,{code:$('s1').value}).then(function(){setupKey='';return loadMe()}).then(draw).catch(function(e){done($('sm'),0,e.message)})}
+
+function start(){setMode('buy');loadMe().catch(function(){}).then(function(){var h=location.hash.slice(1);go(views.indexOf(h)>-1?h:(ME?'dashboard':'home'))})}
+fetch('/api/prices',{credentials:'same-origin'}).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(j){
+  P=j;draw();if(window.EventSource){var es=new EventSource('/api/stream');es.onmessage=function(e){P=JSON.parse(e.data);draw()}}
+}).catch(function(){OFF=true;$('pv').hidden=false;previewPrices()}).then(start);
+</script>
+</body>
+</html>
